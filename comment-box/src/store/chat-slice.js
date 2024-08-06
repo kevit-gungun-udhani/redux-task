@@ -2,13 +2,16 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const chatSlice = createSlice({
     name: 'chat',
-    initialState: {chat: [['hello']]},
+    initialState: {chat: JSON.parse(localStorage.getItem('chat')) || []},
     reducers: {
         reply(state, action){
-            state.chat = [...state.chat, action.payload.reply];
-        },
-        delete(state){
-            state.chat.pop();
+            if (!state.chat[action.payload.index]) {
+                state.chat[action.payload.index] = [];
+                state.chat[action.payload.index].push(action.payload.reply);
+            } else {
+                state.chat[action.payload.index].push(action.payload.reply)
+            }
+            localStorage.setItem('chat', JSON.stringify(state.chat));
         }
     }
 });

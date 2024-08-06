@@ -1,7 +1,8 @@
-import Comment from './Comment';
+import Chat from './Chat';
 import UserActions from './UserActions';
 export default function ShowComment(){
-    const comments = localStorage.getItem("Comment")
+    let comments = JSON.parse(localStorage.getItem("Comment"))
+    comments = comments.toString()
     const comment = comments.split(',')
     
     return (
@@ -10,8 +11,8 @@ export default function ShowComment(){
                 return (
                     <li key={index}>
                         {comment}
-                        <Comment index={index}/>
-                        <UserActions/>
+                        <Chat index={index}/>
+                        <UserActions index={index} />
                     </li>
                 )
             })}

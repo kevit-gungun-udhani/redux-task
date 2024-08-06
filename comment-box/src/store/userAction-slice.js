@@ -2,13 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const userActionSlice = createSlice({
     name: 'userAction',
-    initialState: {isVisible: false},
+    initialState: {isVisible: {}},
     reducers: {
-        userReply(state){
-            state.isVisible = true;
+        userReply(state, action){
+            state.isVisible[action.payload] = !state.isVisible[action.payload];
         },
-        userDelete(state){
-            state.isVisible = false;
+        userDelete(state, action){
+            state.isVisible[action.payload] = false;
         }
     }
 })

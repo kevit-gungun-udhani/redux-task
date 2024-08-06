@@ -12,13 +12,14 @@ export default function Input(){
         dispatch(inputActions.handleInput({
             userInput: input.current.value
         }));
+        input.current.value = "";
     }
 
     if(userInput.length > 0){
-        localStorage.setItem("Comment", userInput);
+        localStorage.setItem("Comment", JSON.stringify(userInput));
     }
 
-    const isCommentAvailable = localStorage.getItem("Comment")
+    const isCommentAvailable = JSON.parse(localStorage.getItem("Comment"))
 
     return (
         <div>
