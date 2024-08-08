@@ -1,4 +1,4 @@
-import {useDispatch, useSelector} from 'react-redux'
+import {useDispatch} from 'react-redux'
 import { useRef } from 'react';
 import { commentActions } from '../store/comment-slice';
 
@@ -16,14 +16,21 @@ export default function Input(){
         dispatch(commentActions.addComment({
             commentId: id,
             comment,
+            isVisible: false,
             chat: []
         }))
         input.current.value = "";
     }
 
+    function isKeyEnter(event) {
+        if (event.keyCode === 13) {
+            handleSubmit();
+        }
+    }
+
     return (
         <div>
-            <input type="text" placeholder="Add your comment" ref={input}/>
+            <input type="text" placeholder="Add your comment" ref={input} onKeyDown={isKeyEnter} />
             <button onClick={handleSubmit}>Submit</button>
         </div>
     )

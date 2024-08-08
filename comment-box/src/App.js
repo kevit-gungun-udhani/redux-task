@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import Input from "./components/Input";
+import ShowComment from "./components/ShowComment";
 function App() {
   const comment = useSelector(state => state.comment.comment)
   console.log(comment)
@@ -7,7 +8,7 @@ function App() {
     <div>
       <p>Comments</p>
       <Input />
-      {comment.length > 0 && <p>{comment[0].comment}</p>}
+      {comment.length > 0 && <ShowComment comment={comment} />}
     </div>
   );
 }

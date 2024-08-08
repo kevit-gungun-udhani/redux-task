@@ -1,4 +1,4 @@
-import { createSlice, current } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const commentSlice = createSlice({
   name: 'comment',
@@ -8,6 +8,18 @@ const commentSlice = createSlice({
   reducers: {
     addComment(state, action) {
       state.comment.push(action.payload)
+    },
+    toggle(state, action) {
+      state.comment.map((comment) => {
+        if (comment.commentId === action.payload) {
+          comment.isVisible = !comment.isVisible;   
+        }
+      })
+    },
+    addReply(state, action) {
+      if (action.payload) {
+        
+      }
     }
   }
 })
