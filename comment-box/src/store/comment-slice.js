@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 
 const commentSlice = createSlice({
   name: 'comment',
@@ -11,15 +11,24 @@ const commentSlice = createSlice({
     },
     toggle(state, action) {
       state.comment.map((comment) => {
-        if (comment.commentId === action.payload) {
-          comment.isVisible = !comment.isVisible;   
+        if (comment.commentId === action.payload.commentId) {
+          comment.isVisible = !comment.isVisible;
+          if(action.payload.hasOwnProperty('replyId')){
+            comment.chat.push(
+              {
+                replyId: action.payload.replyId,
+                data: action.payload.data
+              }
+            )
+          }   
         }
       })
     },
-    addReply(state, action) {
-      if (action.payload) {
-        
-      }
+    deleteComment(state, action){
+      console.log(current(state.comment))
+      state.comment.map((item) => {
+        console.log(item)
+      })
     }
   }
 })

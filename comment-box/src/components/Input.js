@@ -1,14 +1,12 @@
 import {useDispatch} from 'react-redux'
 import { useRef } from 'react';
 import { commentActions } from '../store/comment-slice';
+import generateId from '../utility/GenerateId';
 
 export default function Input(){
     const input = useRef();
     const dispatch = useDispatch();
 
-    function generateId() {
-        return Math.random().toString(16).slice(2);
-    }
 
     function handleSubmit() {
         const id = generateId();
@@ -30,7 +28,7 @@ export default function Input(){
 
     return (
         <div>
-            <input type="text" placeholder="Add your comment" ref={input} onKeyDown={isKeyEnter} />
+            <input type="text" placeholder="Add your comment" ref={input} onKeyDown={isKeyEnter}/>
             <button onClick={handleSubmit}>Submit</button>
         </div>
     )

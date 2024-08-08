@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import { chatActions } from "../store/chat-slice"
 import { userActions } from "../store/userAction-slice";
+import { inputActions } from "../store/input-slice";
 import { useRef } from "react";
 export default function UserActions({ index }) {
     const input = useRef();
@@ -27,12 +28,22 @@ export default function UserActions({ index }) {
         
     }
 
+    function handleDelete(){
+      dispatch(inputActions.handleDelete({
+        index: index
+      }))
+      dispatch(chatActions.delete({
+        index: index
+      }))
+    }
 
     return (
       <>
-        <button onClick={handleReply}>Reply</button>
+        <div>
+          <button onClick={handleReply}>Reply</button>
+          <button onClick={handleDelete}>Delete</button>
+        </div>
         {isVisible && <input type="text" ref={input}></input>}
-        <button>Delete</button>
       </>
     );
 }
