@@ -1,0 +1,19 @@
+.commentBox{
+  display: flex;
+  gap: 1%;
+}
+
+.input{
+  height: 2em;
+  width: 20em;
+  border-radius: 5px;
+}
+
+.button{
+  border: none;
+  border-radius: 5px;
+  width: 8em;
+  background-color: rgb(77, 142, 239);
+  color: white;
+  font-size: medium;
+}

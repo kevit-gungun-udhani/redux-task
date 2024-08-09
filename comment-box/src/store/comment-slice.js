@@ -1,4 +1,4 @@
-import { createSlice, current } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const commentSlice = createSlice({
   name: 'comment',
@@ -25,10 +25,13 @@ const commentSlice = createSlice({
       })
     },
     deleteComment(state, action){
-      console.log(current(state.comment))
-      state.comment.map((item) => {
-        console.log(item)
-      })
+      state.comment = state.comment.filter((comment) => comment.commentId !== action.payload);
+    },
+    deleteReply(state, action) {
+      const commentIndex = state.comment.findIndex((comment) => comment.commentId === action.payload.commentId);
+      const chatArray = state.comment[commentIndex].chat;
+      const replyIndex = chatArray.findIndex((reply) => reply.replyId === action.payload.replyId);
+      state.comment[commentIndex].chat.splice(replyIndex, 1);
     }
   }
 })

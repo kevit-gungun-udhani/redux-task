@@ -1,16 +1,33 @@
-export default function Reply({chat}){
-    console.log(chat)
-    return (
-      <>
-        <ul>
-            {
-                chat.map((reply) => {
-                    return (
-                        <li key={reply.replyId}>{reply.data}</li>
-                    )    
-                })
-            }     
-        </ul>
-      </>
-    );
+import { useDispatch } from "react-redux";
+import { commentActions } from "../store/comment-slice";
+import classes from './Reply.module.css';
+
+export default function Reply({ chat, commentId }) {
+  const dispatch = useDispatch();
+  function handleDelete(replyId, commentId) {
+    dispatch(commentActions.deleteReply(
+      {
+        replyId,
+        commentId
+      }
+    ))
+  }
+  return (
+    <>
+      {chat.map((reply) => {
+        return (
+          <div key={reply.replyId} className={classes.replyBox}>
+            <span>{reply.data}</span>
+            <button
+              onClick={() => {
+                handleDelete(reply.replyId, commentId);
+              }}
+            >
+              Delete
+            </button>
+          </div>
+        );
+      })}
+    </>
+  );
 }
